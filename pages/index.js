@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Layout, {siteTitle} from "../components/layout";
 import React from "react";
 
+ // this is the home page
 export default function Home() {
     return (
         <Layout home>
