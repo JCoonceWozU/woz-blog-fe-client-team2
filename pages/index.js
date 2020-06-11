@@ -1,21 +1,24 @@
 import Head from 'next/head'
-import {siteTitle} from "../components/layout";
+import Layout, {siteTitle} from "../components/layout";
 import React from "react";
 
 export default function Home() {
-  return (
-    <div className="container">
-      <Head>
-        <title>{siteTitle}</title>
-        {/*<link rel="icon" href="/favicon.ico" />*/}
-      </Head>
+    return (
+        <Layout home>
+            <Head>
+                <title>{siteTitle}</title>
+                {/*<link rel="icon" href="/favicon.ico" />*/}
+            </Head>
 
-      <main>
-        <h1 className="title">
-          Learn <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-      </main>
+            <section>
+                <h1>
+                    {siteTitle}
+                </h1>
+            </section>
+            <section>
+                <p>This section will display Article cards with mapping to [id].</p>
+            </section>
 
-    </div>
-  )
+        </Layout>
+    )
 }
