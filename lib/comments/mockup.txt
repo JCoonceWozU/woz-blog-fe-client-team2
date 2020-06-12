@@ -1,0 +1,66 @@
+import React, { createElement, useState } from 'react';
+import { Comment, Tooltip, Avatar } from 'antd';
+import moment from 'moment';
+
+const Demo = () => {
+  const [action, setAction] = useState(null);
+
+  const actions = [
+    <span key="comment-basic-reply-to">Reply to</span>,
+  ];
+
+  return (
+    <Comment
+      actions={actions}
+      author={//this is where the comment author info goes//}
+      avatar={
+        <Avatar
+          src="//comment author avatar"
+        />
+      }
+      content={
+        <p>
+          //comment data
+        </p>
+      }
+      datetime={
+        <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
+          <span>{moment().fromNow()}</span>
+        </Tooltip>
+      }
+    />
+  );
+};
+
+ReactDOM.render(<Demo />, mountNode);
+
+
+//
+// this is for the list
+//
+
+import { Comment, Tooltip, List } from 'antd';
+import moment from 'moment';
+
+const data = [//this is where the comments are put in];
+
+ReactDOM.render(
+  <List
+    className="comment-list"
+    header={`${data.length} replies`}
+    itemLayout="horizontal"
+    dataSource={data}
+    renderItem={item => (
+      <li>
+        <Comment
+          actions={item.actions}
+          author={item.author}
+          avatar={item.avatar}
+          content={item.content}
+          datetime={item.datetime}
+        />
+      </li>
+    )}
+  />,
+  mountNode,
+);
