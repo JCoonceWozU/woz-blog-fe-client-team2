@@ -17,7 +17,8 @@ export default function Home() {
                 </h1>
             </section>
             <section>
-                <p>This section will display Article cards with mapping to [id].</p>
+                <p>This section will display Article cards with routes to [id].</p>
+
             </section>
 
         </Layout>
