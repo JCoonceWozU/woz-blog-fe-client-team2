@@ -9,3 +9,5 @@ export type ArticleType = {
     description: string;
     body: string;
 };
+
+// get rid of ArticleType?
