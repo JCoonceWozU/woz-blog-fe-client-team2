@@ -3,8 +3,6 @@ import Head from "next/dist/next-server/lib/head";
 import React from "react";
 import {getAllArticleIds, getArticle} from "../../lib/article/article";
 
-
-
 export default function articles({ article }) {
     return (
         <Layout>
@@ -15,6 +13,8 @@ export default function articles({ article }) {
                 {article.title}
                 <br />
                 {article.id}
+                <br />
+                {article.body}
                 <br />
                 {/*<Date dateString={postData.date} />*/}
                 <br />
