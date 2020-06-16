@@ -1,43 +1,47 @@
-import React, {Component} from 'react';
-import Layout, {siteTitle} from "../components/layout";
-import Head from "next";
+import Head from 'next/head'
+import Layout, {siteTitle} from "../../components/layout";
+import React from "react";
 import Link from "next";
+import fetch from "isomorphic-unfetch";
 
-//this is home page
-const Index = () => {
+
+const Articles = ({articles}) => {
     return (
         <Layout home>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
-
             <section>
                 <h1>
-                    {siteTitle}
+                    Articles
                 </h1>
             </section>
             <section>
-
-                <p>This section will display Article cards with routes to [id].</p>
-                <h2>Articles</h2>
                 <ul>
                     {articles.map(({id, title}) => (
                         <li key={id}>
-                            <Link href="./articles/[id]" as={`/articles/${id}`}>
+                            <Link href="./[id].js" as={`/articles/${id}`}>
                                 <a>{title}</a>
                             </Link>
-                            <br/>
-                            <small>
 
-                            </small>
                         </li>
                     ))}
                 </ul>
-
             </section>
-
         </Layout>
     )
 }
 
-export default Index;
+export async function getStaticProps() {
+    const res = await fetch('http://localhost:8080/api/articles')
+    const articles = await res.json()
+    console.log(articles)
+
+    return {
+        props: {
+            articles,
+        },
+    }
+}
+
+export default Articles;

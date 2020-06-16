@@ -1,8 +1,9 @@
 import Layout from "../../components/layout";
 import Head from "next/dist/next-server/lib/head";
 import React from "react";
+import fetch from "isomorphic-unfetch";
 
-export default function articles({ article }) {
+const Article = ({article}) => {
     return (
         <Layout>
             <Head>
@@ -10,21 +11,21 @@ export default function articles({ article }) {
             </Head>
             <article>
                 {article.title}
-                <br />
+                <br/>
                 {article.id}
-                <br />
+                <br/>
                 {article.body}
-                <br />
+                <br/>
                 {/*<Date dateString={postData.date} />*/}
-                <br />
+                <br/>
                 {/*<div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />*/}
             </article>
         </Layout>
     );
 }
 
-export async function getStaticProps({ params }) {
-    const res = await fetch('https://localhost:8080/api/articles/${params.id}')
+export async function getStaticProps({params}) {
+    const res = await fetch('http://localhost:8080/api/articles/${params.id}')
     const article = res.json();
     return {
         props: {
@@ -32,5 +33,21 @@ export async function getStaticProps({ params }) {
         },
     };
 }
+
+export async function getStaticPaths() {
+    const res = await fetch('http://localhost:8080/api/articles')
+    const articles = await res.json()
+    const paths = articles.map((article) => ({
+        params: { id: article.id },
+    }))
+    return {
+        paths: [
+            { params: { id: '1' } },
+        ],
+        fallback: false
+    };
+}
+
+export default Article;
 
 //serverside rendered
