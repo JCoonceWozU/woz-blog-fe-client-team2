@@ -3,9 +3,13 @@ import Layout, {siteTitle} from "../../components/layout";
 import React from "react";
 import Link from "next";
 import fetch from "isomorphic-unfetch";
+import useSWR from "swr";
 
 
-const Articles = ({articles}) => {
+const Articles = ({props}) => {
+
+    //const { article } = useSWR('/api/articles', fetch)
+
     return (
         <Layout home>
             <Head>
@@ -18,12 +22,11 @@ const Articles = ({articles}) => {
             </section>
             <section>
                 <ul>
-                    {articles.map(({id, title}) => (
-                        <li key={id}>
-                            <Link href="./[id].js" as={`/articles/${id}`}>
-                                <a>{title}</a>
+                    {props.article.map((article) => (
+                        <li key={article.id}>
+                            <Link href="./articles/[id]" as={`/articles/${article.id}`}>
+                                <a>{props.article.title}</a>
                             </Link>
-
                         </li>
                     ))}
                 </ul>
@@ -32,16 +35,15 @@ const Articles = ({articles}) => {
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch('http://localhost:8080/api/articles')
-    const articles = await res.json()
-    console.log(articles)
-
-    return {
-        props: {
-            articles,
-        },
-    }
-}
+// export async function getStaticProps() {
+//     const res = await fetch('http://localhost:8080/api/articles')
+//     const article = await res.json()
+//     //console.log(article)
+//     return {
+//         props: {
+//             article,
+//         },
+//     }
+// }
 
 export default Articles;
