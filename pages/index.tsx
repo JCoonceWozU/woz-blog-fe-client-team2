@@ -1,38 +1,47 @@
 import React from "react";
 import Link from "next/link";
+import useSWR from "swr";
 
 // this is the home page: "/"
 
-const Home = ({articles}) => {
+const fetcher = url => fetch(url).then(res => res.json())
+
+const Home = () => {
+
+    const { data, error } = useSWR(`http://localhost:8080/api/articles/`, fetcher)
+
+    if (error) return <div>Failed to load articles</div>
+    if (!data) return <div>Loading...</div>
+
     return (
         <div>
             <title>'Woz U Next.js Blog Project Team 2'</title>
             <section>
                 <h1>
-                    'Woz U Next.js Blog Project Team 2'
+                    <p>'Woz U Next.js Blog Project Team 2'</p>
                 </h1>
             </section>
             <section>
                 <h2>
                     <Link as={`/articles/`} href={`/articles/`}>
-                        All Articles
+                        <a>All Articles</a>
                     </Link>
                 </h2>
             </section>
             <section>
                 <p>Display Article titles with snippets and links to each [id] below:</p>
-                <p>{articles.map(article => {
+                <h3>{data.map(article => {
                     return (
-                        <h3 key={article.id}>
+                        <p key={article.id}>
                             <Link as={`/articles/${article.id}`} href={`/articles/[id]`}>
-                                {article.title}
+                                <a>{article.title}</a>
                             </Link>
-                        </h3>
+                        </p>
                     );
-                })}</p>
+                })}</h3>
             </section>
             <section>
-                {articles.map(article => {
+                {data.map(article => {
                     return (
                         <p key={article.body}>
                             {article.body}
@@ -45,13 +54,12 @@ const Home = ({articles}) => {
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch('http://localhost:8080/api/articles')
-    const articles = await res.json()
-    return {
-        props: {articles}
-    };
-}
-
-
 export default Home;
+
+// export async function getStaticProps() {
+//     const res = await fetch('http://localhost:8080/api/articles')
+//     const articles = await res.json()
+//     return {
+//         props: {articles}
+//     };
+// }

@@ -1,24 +1,23 @@
 import React from "react";
-import {NextPage, GetStaticProps} from "next";
 import Link from "next/link";
-import {useRouter} from "next/router";
 import useSWR from "swr";
 
 // this is the articles list page: "/articles"
-const Articles: NextPage<{
-    articles: {
-        id: long;
-        slug: string;
-        title: string;
-        body: string;
-    }[];
-}> = props => {
+const fetcher = url => fetch(url).then(res => res.json())
+
+const Articles = () => {
+
+    const { data, error } = useSWR(`http://localhost:8080/api/articles/`, fetcher)
+
+    if (error) return <div>Failed to load articles</div>
+    if (!data) return <div>Loading...</div>
+
     return (
         <div>
             <title>'Woz U Next.js Blog Project Team 2'</title>
             <section>
                 <h1>
-                    <h1>Articles</h1>
+                    <p>Articles</p>
                 </h1>
             </section>
             <section>
@@ -26,11 +25,11 @@ const Articles: NextPage<{
             </section>
             <section>
                 <ul>
-                    {props.articles.map(article => {
+                    {data.map(article => {
                         return (
                             <li key={article.id}>
                                 <Link as={`/articles/${article.id}`} href={`/articles/[id]`}>
-                                    {article.title}
+                                    <a>{article.title}</a>
                                 </Link>
                             </li>
                         );
@@ -40,14 +39,6 @@ const Articles: NextPage<{
 
         </div>
     )
-}
-
-export async function getStaticProps() {
-    const res = await fetch('http://localhost:8080/api/articles')
-    const articles = await res.json()
-    return {
-        props: {articles}
-    };
 }
 
 export default Articles;

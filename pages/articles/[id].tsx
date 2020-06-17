@@ -33,17 +33,6 @@ const ArticlePage = () => {
     )
 }
 
-
-// export const getServerSideProps: GetServerSideProps = async ({params}) => {
-//     const { id } = params;
-//     const res = await fetch(`http://localhost:3000/api/articles/${id}`);
-//     const article = await res.json();
-//     console.log(article)
-//     return {
-//         props: { article }
-//     }
-// }
-
 export default ArticlePage;
 
 
