@@ -25,11 +25,11 @@ const Articles: NextPage<{
             </section>
             <section>
                 <ul>
-                    {props.articles.map(x => {
+                    {props.articles.map(article => {
                         return (
-                            <li key={id}>
-                                <Link as={`/articles/${x.slug}`} href={`/articles/[id]`}>
-                                    {x.title}
+                            <li key={article.id}>
+                                <Link as={`/articles/${article.id}`} href={`/articles/[id]`}>
+                                    {article.title}
                                 </Link>
                             </li>
                         );
