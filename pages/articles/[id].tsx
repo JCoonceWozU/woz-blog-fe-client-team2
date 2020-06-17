@@ -1,6 +1,7 @@
 import React from "react";
 import {useRouter} from "next/router";
 import useSWR from 'swr';
+import CommentList from "../../components/comments/commentList";
 
 const fetcher = url => fetch(url).then(res => res.json())
 
@@ -19,14 +20,13 @@ const ArticlePage = () => {
                 <h1>
                     <p>Article: {data.title}</p>
                 </h1>
-
             </section>
             <section>
                 <p>This section will display each individual article.</p>
                 <p> {data.body} </p>
             </section>
             <section>
-
+                <CommentList />
             </section>
 
         </div>
