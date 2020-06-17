@@ -1,0 +1,52 @@
+import React from "react";
+import {NextPage, GetStaticProps} from "next";
+import Link from "next/link";
+
+// this is the articles list page: "/articles"
+const Articles: NextPage<{
+    articles: {
+        id: long;
+        slug: string;
+        title: string;
+        body: string;
+        description: string;
+    }[];
+}> = props => {
+    return (
+        <div>
+            <title>'Woz U Next.js Blog Project Team 2'</title>
+            <section>
+                <h1>
+                    <h1>Articles</h1>
+                </h1>
+            </section>
+            <section>
+                <p>This section will display Article titles with links to each [id].</p>
+            </section>
+            <section>
+                <ul>
+                    {props.articles.map(x => {
+                        return (
+                            <li key={id}>
+                                <Link as={`/articles/${x.slug}`} href={`/articles/[id]`}>
+                                    {x.title}
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </section>
+
+        </div>
+    )
+}
+
+export async function getStaticProps() {
+    const res = await fetch('http://localhost:8080/api/articles')
+    const articles = await res.json()
+    return {
+        props: {articles}
+    };
+}
+
+export default Articles;
