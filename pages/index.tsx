@@ -55,11 +55,3 @@ const Home = () => {
 }
 
 export default Home;
-
-// export async function getStaticProps() {
-//     const res = await fetch('http://localhost:8080/api/articles')
-//     const articles = await res.json()
-//     return {
-//         props: {articles}
-//     };
-// }
