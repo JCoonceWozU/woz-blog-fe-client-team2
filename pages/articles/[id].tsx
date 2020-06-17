@@ -1,5 +1,4 @@
-import {NextPage} from "next";
-import Link from "next/link";
+import {GetStaticPaths, NextPage} from "next";
 import React from "react";
 
 const ArticlePage: NextPage<{
@@ -11,16 +10,16 @@ const ArticlePage: NextPage<{
 }> = props => {
     return (
         <div>
-            <title> </title>
+            <title> {props.article.title} | Woz U Woz U Next.js Blog Project Team 2</title>
             <section>
                 <h1>
-                    <h1>Article: {props.title}</h1>
+                    <h1>Article: {props.article.title}</h1>
                 </h1>
 
             </section>
             <section>
                 <p>This section will display each individual article.</p>
-                <p> {props.body} </p>
+                <p> {props.article.body} </p>
             </section>
             <section>
 
@@ -34,23 +33,28 @@ export async function getStaticPaths() {
     const res = await fetch('http://localhost:8080/api/articles/${id}')
     const articles = res.json();
     const ids = articles.map(article => article.id);
-    const paths = ids.map(id => ({ params: { id } }));
+    const paths = ids.map(id => ({params: {id}}));
     return {
         paths,
         fallback: false
     };
 }
 
-export async function getStaticProps( {params: { id } } ) {
+export async function getStaticProps({params: {id}}) {
     const res = await fetch('http://localhost:8080/api/articles/${id}');
-    const articles= await res.json()
+    const articles = await res.json()
     const article = articles.find(article => article.id === id)
     return {
         props: {
-            title: article.title,
-            body: article.body,
+            article,
         }
     };
 }
 
 export default ArticlePage;
+
+// props: {
+//         title: article.title,
+//         body: article.body
+// }
+

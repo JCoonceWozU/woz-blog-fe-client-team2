@@ -50,3 +50,17 @@ export async function getStaticProps() {
 }
 
 export default Articles;
+
+// const Articles: NextPage<{
+//     articles: {
+//         id: long;
+//         slug: string;
+//         title: string;
+//         body: string;
+//         description: string;
+//     }[];
+// }> = props => {
+//     return (
+//
+//     )
+// }
