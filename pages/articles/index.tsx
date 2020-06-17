@@ -1,6 +1,8 @@
 import React from "react";
 import {NextPage, GetStaticProps} from "next";
 import Link from "next/link";
+import {useRouter} from "next/router";
+import useSWR from "swr";
 
 // this is the articles list page: "/articles"
 const Articles: NextPage<{
@@ -9,7 +11,6 @@ const Articles: NextPage<{
         slug: string;
         title: string;
         body: string;
-        description: string;
     }[];
 }> = props => {
     return (
@@ -50,17 +51,3 @@ export async function getStaticProps() {
 }
 
 export default Articles;
-
-// const Articles: NextPage<{
-//     articles: {
-//         id: long;
-//         slug: string;
-//         title: string;
-//         body: string;
-//         description: string;
-//     }[];
-// }> = props => {
-//     return (
-//
-//     )
-// }
