@@ -1,15 +1,7 @@
-import useSWR, {trigger} from "swr";
+import {trigger} from "swr";
 import React from "react";
-import {useRouter} from "next/router";
-
-const fetcher = url => fetch(url).then(res => res.json())
 
 const CommentInput = () => {
-
-    const router = useRouter();
-    const {
-        query: { id },
-    } = router;
 
     const [content, setContent] = React.useState("");
     const [isLoading, setLoading] = React.useState(false);
@@ -21,17 +13,26 @@ const CommentInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        useSWR(`http://localhost:8080/api/comment/`, fetcher)
+        const res = await fetch('http://localhost:8080/api/comment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json, text/plain, */*',
+            },
+            body: JSON.stringify(content),
+        })
+        console.log(res)
         setLoading(false);
         setContent("");
-        await trigger(`http://localhost:8080/api/comment/`);
+        await trigger(`http://localhost:8080/api/comment`);
+
     };
 
     return (
         <form className="card comment-form" onSubmit={handleSubmit}>
             <div className="card-block">
         <textarea
-            rows={3}
+            rows={5}
             className="form-control"
             placeholder="Write a comment..."
             value={content}
@@ -49,3 +50,8 @@ const CommentInput = () => {
 };
 
 export default CommentInput;
+
+// const fetcher = url => fetch(url).then(res => res.json())
+
+// const router = useRouter();
+// const { data } = useSWR(`http://localhost:8080/api/comment/${router.query.id}`, fetcher)

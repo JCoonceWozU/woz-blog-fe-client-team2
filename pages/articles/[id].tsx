@@ -2,6 +2,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import useSWR from 'swr';
 import CommentList from "../../components/comments/commentList";
+import CommentInput from "../../components/comments/commentInput";
 
 const fetcher = url => fetch(url).then(res => res.json())
 
@@ -26,7 +27,8 @@ const ArticlePage = () => {
                 <p> {data.body} </p>
             </section>
             <section>
-                <CommentList />
+                <CommentInput />
+                {/*<CommentList />*/}
             </section>
 
         </div>
