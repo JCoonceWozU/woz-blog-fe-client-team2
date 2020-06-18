@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import useSWR from "swr";
+import Layout from "../components/common/Layout";
 
 // this is the home page: "/"
 
@@ -14,7 +15,7 @@ const Home = () => {
     if (!data) return <div>Loading...</div>
 
     return (
-        <div>
+        <Layout home>
             <title>'Woz U Next.js Blog Project Team 2'</title>
             <section>
                 <h1>
@@ -50,7 +51,7 @@ const Home = () => {
                 })}
             </section>
 
-        </div>
+        </Layout>
     )
 }
 

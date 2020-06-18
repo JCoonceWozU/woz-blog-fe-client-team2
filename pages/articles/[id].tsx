@@ -1,8 +1,9 @@
 import React from "react";
 import {useRouter} from "next/router";
 import useSWR from 'swr';
-import CommentList from "../../components/comments/commentList";
 import CommentInput from "../../components/comments/commentInput";
+import Layout from "../../components/common/Layout";
+import Head from "next/head";
 
 const fetcher = url => fetch(url).then(res => res.json())
 
@@ -16,7 +17,9 @@ const ArticlePage = () => {
 
     return (
         <div>
-            <title> {data.title} | Woz U Woz U Next.js Blog Project Team 2</title>
+            <Head>
+            <title> siteTitle </title>
+            </Head>
             <section>
                 <h1>
                     <p>Article: {data.title}</p>
@@ -30,7 +33,6 @@ const ArticlePage = () => {
                 <CommentInput />
                 {/*<CommentList />*/}
             </section>
-
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import useSWR from "swr";
+import Layout from "../../components/common/Layout";
 
 // this is the articles list page: "/articles"
 const fetcher = url => fetch(url).then(res => res.json())
@@ -13,7 +14,7 @@ const Articles = () => {
     if (!data) return <div>Loading...</div>
 
     return (
-        <div>
+        <Layout>
             <title>'Woz U Next.js Blog Project Team 2'</title>
             <section>
                 <h1>
@@ -37,7 +38,7 @@ const Articles = () => {
                 </ul>
             </section>
 
-        </div>
+        </Layout>
     )
 }
 

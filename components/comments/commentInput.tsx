@@ -13,7 +13,7 @@ const CommentInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const res = await fetch('http://localhost:8080/api/comment/', {
+        const res = await fetch('http://localhost:8080/api/comments/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,12 +24,10 @@ const CommentInput = () => {
         console.log(res)
         setLoading(false);
         setContent("");
-        await trigger(`http://localhost:8080/api/comment`);
-
     };
 
     return (
-        <form className="card comment-form" onSubmit={handleSubmit}>
+        <form className="card comment-form">
             <div className="card-block">
         <textarea
             rows={5}
@@ -41,7 +39,7 @@ const CommentInput = () => {
         />
             </div>
             <div className="card-footer">
-                <button className="btn btn-sm btn-primary" type="submit">
+                <button className="btn btn-sm btn-primary" type="submit" onSubmit={handleSubmit}>
                     Post Comment
                 </button>
             </div>
@@ -51,7 +49,5 @@ const CommentInput = () => {
 
 export default CommentInput;
 
-// const fetcher = url => fetch(url).then(res => res.json())
 
-// const router = useRouter();
-// const { data } = useSWR(`http://localhost:8080/api/comment/${router.query.id}`, fetcher)
+//have button redirect to articles

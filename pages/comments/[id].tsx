@@ -8,7 +8,10 @@ const fetcher = url => fetch(url).then(res => res.json())
 const CommentsPage = () => {
 
     const router = useRouter();
-    const {data} = useSWR(`http://localhost:8080/api/comment/${router.query.id}`, fetcher)
+    const {data, error} = useSWR(`http://localhost:8080/api/comments/${router.query.id}`, fetcher)
+
+    if (error) return <div>Failed to load articles</div>
+    if (!data) return <div>Loading...</div>
 
     return (
         <div>
@@ -16,7 +19,7 @@ const CommentsPage = () => {
             <section>
                 <h1>
                     <p>Comments</p>
-                    {data.body}
+                    <p>{data.id}</p>
                 </h1>
             </section>
 
