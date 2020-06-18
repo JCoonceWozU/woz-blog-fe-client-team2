@@ -8,7 +8,7 @@ const fetcher = url => fetch(url).then(res => res.json())
 const CommentsPage = () => {
 
     const router = useRouter();
-    const {data} = useSWR(`http://localhost:8080/api/comment/${router.query.id}`, fetcher)
+    const {data} = useSWR(`http://localhost:8080/api/comments/${router.query.id}`, fetcher)
 
     return (
         <div>

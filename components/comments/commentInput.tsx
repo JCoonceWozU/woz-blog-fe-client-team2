@@ -13,7 +13,7 @@ const CommentInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const res = await fetch('http://localhost:8080/api/comment/', {
+        const res = await fetch('http://localhost:8080/api/comments/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
