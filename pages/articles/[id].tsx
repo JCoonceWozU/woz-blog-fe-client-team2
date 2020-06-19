@@ -4,6 +4,9 @@ import useSWR from 'swr';
 import CommentInput from "../../components/comments/commentInput";
 import Layout from "../../components/common/Layout";
 import Head from "next/head";
+import CommentList from "../../components/comments/commentList";
+
+// this page directs to individual article @ /articles/${id}
 
 const fetcher = url => fetch(url).then(res => res.json())
 
@@ -16,13 +19,15 @@ const ArticlePage = () => {
     if (!data) return <div>Loading...</div>
 
     return (
-        <div>
+        <Layout>
             <Head>
             <title> siteTitle </title>
             </Head>
             <section>
                 <h1>
-                    <p>Article: {data.title}</p>
+                    <p>Article:
+                        {data.title}
+                    </p>
                 </h1>
             </section>
             <section>
@@ -31,9 +36,9 @@ const ArticlePage = () => {
             </section>
             <section>
                 <CommentInput />
-                {/*<CommentList />*/}
+                <CommentList />
             </section>
-        </div>
+        </Layout>
     )
 }
 

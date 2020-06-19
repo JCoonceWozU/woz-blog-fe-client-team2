@@ -1,4 +1,3 @@
-import {trigger} from "swr";
 import React from "react";
 
 const CommentInput = () => {
@@ -50,4 +49,4 @@ const CommentInput = () => {
 export default CommentInput;
 
 
-//have button redirect to articles
+//have submit button redirect to articles
